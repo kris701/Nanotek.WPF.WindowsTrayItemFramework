@@ -74,7 +74,7 @@ namespace WindowsTrayItemFramework
             await SwitchView(_currentWindow);
         }
 
-        private async void Window_Deactivated(object sender, EventArgs e)
+        private async void Window_Deactivated(object? sender, EventArgs e)
         {
             _isActive = false;
             for (int i = 0; i < 500; i += 100)
@@ -90,7 +90,7 @@ namespace WindowsTrayItemFramework
             }
         }
 
-        private void Window_Activated(object sender, EventArgs e)
+        private void Window_Activated(object? sender, EventArgs e)
         {
             _isActive = true;
         }
