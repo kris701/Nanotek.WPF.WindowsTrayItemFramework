@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BackupManager3.Views
+namespace WindowsTrayItemFramework.Views
 {
     /// <summary>
     /// Interaction logic for MainView.xaml

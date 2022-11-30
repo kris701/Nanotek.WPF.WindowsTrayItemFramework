@@ -1,6 +1,6 @@
-﻿using BackupManager3.Data;
-using BackupManager3.Helpers;
-using BackupManager3.Views;
+﻿using WindowsTrayItemFramework.Data;
+using WindowsTrayItemFramework.Helpers;
+using WindowsTrayItemFramework.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BackupManager3
+namespace WindowsTrayItemFramework
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -26,20 +26,9 @@ namespace BackupManager3
     public partial class MainWindow : Window, ITrayWindow
     {
         private bool _isActive = false;
-        private SaveModel _save;
 
         public MainWindow()
         {
-            if (File.Exists("save.json"))
-            {
-                var result = JsonSerializer.Deserialize<SaveModel>(File.ReadAllText("save.json"));
-                if (result != null)
-                    _save = result;
-                else
-                    _save = new SaveModel();
-            }
-            else
-                _save = new SaveModel();
             InitializeComponent();
         }
 
@@ -55,17 +44,12 @@ namespace BackupManager3
             await FadeHelper.FadeIn(this, 0.1, 10, 0.8);
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Save();
-        }
-
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             System.Drawing.Icon icnTask;
             Stream st;
             System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
-            st = a.GetManifestResourceStream("BackupManager3.backupmanager3.ico");
+            st = a.GetManifestResourceStream("WindowsTrayItemFramework.icon.ico");
             NotifyIcon.Icon = new System.Drawing.Icon(st);
 
             Visibility = Visibility.Hidden;
@@ -74,7 +58,6 @@ namespace BackupManager3
 
         private async void Window_Deactivated(object sender, EventArgs e)
         {
-            Save();
             _isActive = false;
             for (int i = 0; i < 500; i += 100)
             {
@@ -94,13 +77,6 @@ namespace BackupManager3
             _isActive = true;
         }
 
-        private void Save()
-        {
-            if (File.Exists("save.json"))
-                File.Delete("save.json");
-            File.WriteAllText("save.json", JsonSerializer.Serialize(_save));
-        }
-
         private void NotifyIcon_TrayRightMouseDown(object sender, RoutedEventArgs e)
         {
             NotifyIcon.ContextMenu.IsOpen = true;
@@ -108,7 +84,6 @@ namespace BackupManager3
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            Save();
             Close();
         }
 

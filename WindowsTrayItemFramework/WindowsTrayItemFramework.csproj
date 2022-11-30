@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="backupmanager3.ico" />
+    <None Remove="icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="backupmanager3.ico" />
+    <EmbeddedResource Include="icon.ico" />
   </ItemGroup>
 
   <ItemGroup>

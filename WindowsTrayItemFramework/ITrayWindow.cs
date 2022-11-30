@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace BackupManager3
+namespace WindowsTrayItemFramework
 {
     public interface ITrayWindow
     {

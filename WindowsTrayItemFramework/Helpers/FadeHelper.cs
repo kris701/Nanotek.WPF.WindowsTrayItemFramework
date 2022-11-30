@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace BackupManager3.Helpers
+namespace WindowsTrayItemFramework.Helpers
 {
     internal static class FadeHelper
     {
