@@ -6,7 +6,7 @@
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:local="clr-namespace:WindowsTrayItemFramework"
         mc:Ignorable="d"
-        Title="Backup Manager 3" Height="450" Width="800" Closing="Window_Closing" Loaded="Window_Loaded" AllowsTransparency="True" WindowStyle="None" Opacity="0" Deactivated="Window_Deactivated" Activated="Window_Activated" ShowInTaskbar="False">
+        Title="Backup Manager 3" Height="450" Width="800" Loaded="Window_Loaded" AllowsTransparency="True" WindowStyle="None" Opacity="0" Deactivated="Window_Deactivated" Activated="Window_Activated" ShowInTaskbar="False">
     <Grid x:Name="MainPanel">
         <tb:TaskbarIcon x:Name="NotifyIcon"
                         Visibility="Visible"

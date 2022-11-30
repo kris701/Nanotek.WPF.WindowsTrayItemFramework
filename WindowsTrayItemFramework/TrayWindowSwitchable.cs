@@ -10,7 +10,7 @@ namespace WindowsTrayItemFramework
     public interface TrayWindowSwitchable
     {
         public UIElement Element { get; }
-        public double TWidth { get; }
-        public double THeight { get; }
+        public double TargetWidth { get; }
+        public double TargetHeight { get; }
     }
 }

@@ -20,16 +20,13 @@ namespace WindowsTrayItemFramework.Views
     /// </summary>
     public partial class MainView : UserControl, TrayWindowSwitchable
     {
-        private ITrayWindow _trayWindow;
-
         public UIElement Element { get; }
-        public double TWidth { get; } = 800;
-        public double THeight { get; } = 450;
+        public double TargetWidth { get; } = 800;
+        public double TargetHeight { get; } = 450;
 
-        public MainView(ITrayWindow trayWindow)
+        public MainView()
         {
             InitializeComponent();
-            _trayWindow = trayWindow;
             Element = this;
         }
     }

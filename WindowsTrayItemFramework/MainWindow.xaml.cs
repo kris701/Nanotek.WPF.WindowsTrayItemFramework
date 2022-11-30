@@ -1,5 +1,4 @@
-﻿using WindowsTrayItemFramework.Data;
-using WindowsTrayItemFramework.Helpers;
+﻿using WindowsTrayItemFramework.Helpers;
 using WindowsTrayItemFramework.Views;
 using System;
 using System.Collections.Generic;
@@ -20,9 +19,6 @@ using System.Windows.Shapes;
 
 namespace WindowsTrayItemFramework
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window, ITrayWindow
     {
         private bool _isActive = false;
@@ -30,6 +26,7 @@ namespace WindowsTrayItemFramework
         public MainWindow()
         {
             InitializeComponent();
+            new ViewSwitcher(this);
         }
 
         public async Task SwitchView(TrayWindowSwitchable toElement)
@@ -37,8 +34,8 @@ namespace WindowsTrayItemFramework
             await FadeHelper.FadeOut(this, 0.1, 10);
             MainPanel.Children.Clear();
             MainPanel.Children.Add(toElement.Element);
-            Width = toElement.TWidth;
-            Height = toElement.THeight;
+            Width = toElement.TargetWidth;
+            Height = toElement.TargetHeight;
             this.Left = SystemParameters.PrimaryScreenWidth - this.Width - 10;
             this.Top = SystemParameters.PrimaryScreenHeight - this.Height - 45;
             await FadeHelper.FadeIn(this, 0.1, 10, 0.8);
@@ -46,14 +43,14 @@ namespace WindowsTrayItemFramework
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            System.Drawing.Icon icnTask;
-            Stream st;
             System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
-            st = a.GetManifestResourceStream("WindowsTrayItemFramework.icon.ico");
+            var st = a.GetManifestResourceStream("WindowsTrayItemFramework.icon.ico");
+            if (st == null)
+                throw new FileNotFoundException("Error! Icon file not found!");
             NotifyIcon.Icon = new System.Drawing.Icon(st);
 
             Visibility = Visibility.Hidden;
-            await SwitchView(new MainView(this));
+            await SwitchView(new MainView());
         }
 
         private async void Window_Deactivated(object sender, EventArgs e)
