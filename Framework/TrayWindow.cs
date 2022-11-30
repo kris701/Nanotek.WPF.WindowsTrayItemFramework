@@ -1,39 +1,65 @@
-﻿using WindowsTrayItemFramework.Helpers;
-using WindowsTrayItemFramework.Views;
+﻿using Framework.Helpers;
+using Hardcodet.Wpf.TaskbarNotification;
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Forms;
+using System.Windows.Media.Media3D;
 
-namespace WindowsTrayItemFramework
+namespace Framework
 {
-    public partial class MainWindow : Window, ITrayWindow
+    public class TrayWindow : Window, ITrayWindow
     {
         private bool _isActive = false;
+        private TrayWindowSwitchable _currentWindow;
+        private System.Drawing.Icon _icon;
+        private Grid _mainGrid;
+        private TaskbarIcon _notifyIcon;
 
-        public MainWindow()
+        public TrayWindow(string title, System.Drawing.Icon icon, TrayWindowSwitchable initialWindow)
         {
-            InitializeComponent();
+            _mainGrid = new Grid();
+            this.AddChild(_mainGrid);
+            _notifyIcon = new TaskbarIcon()
+            {
+                Visibility = Visibility.Visible,
+                ToolTipText = title,
+                PopupActivation = PopupActivationMode.All
+            };
+            _notifyIcon.TrayMouseDoubleClick += NotifyIcon_TrayMouseDoubleClick;
+            _notifyIcon.TrayRightMouseDown += NotifyIcon_TrayRightMouseDown;
+            _notifyIcon.ContextMenu = new ContextMenu()
+            {
+                IsOpen = false
+            };
+            var exitItem = new MenuItem()
+            {
+                Header = "Exit"
+            };
+            exitItem.Click += ExitButton_Click;
+            _notifyIcon.ContextMenu.Items.Add(exitItem);
+
+            _mainGrid.Children.Add(_notifyIcon);
+
+            this.Loaded += Window_Loaded;
+            this.Deactivated += Window_Deactivated;
+            this.Activated += Window_Activated;
+
+            _currentWindow = initialWindow;
+            _icon = icon;
             new ViewSwitcher(this);
         }
 
         public async Task SwitchView(TrayWindowSwitchable toElement)
         {
             await FadeHelper.FadeOut(this, 0.1, 10);
-            MainPanel.Children.Clear();
-            MainPanel.Children.Add(toElement.Element);
+            _mainGrid.Children.Clear();
+            _mainGrid.Children.Add(toElement.Element);
             Width = toElement.TargetWidth;
             Height = toElement.TargetHeight;
             this.Left = SystemParameters.PrimaryScreenWidth - this.Width - 10;
@@ -43,14 +69,9 @@ namespace WindowsTrayItemFramework
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
-            var st = a.GetManifestResourceStream("WindowsTrayItemFramework.icon.ico");
-            if (st == null)
-                throw new FileNotFoundException("Error! Icon file not found!");
-            NotifyIcon.Icon = new System.Drawing.Icon(st);
-
+            _notifyIcon.Icon = _icon;
             Visibility = Visibility.Hidden;
-            await SwitchView(new MainView());
+            await SwitchView(_currentWindow);
         }
 
         private async void Window_Deactivated(object sender, EventArgs e)
@@ -76,7 +97,7 @@ namespace WindowsTrayItemFramework
 
         private void NotifyIcon_TrayRightMouseDown(object sender, RoutedEventArgs e)
         {
-            NotifyIcon.ContextMenu.IsOpen = true;
+            _notifyIcon.ContextMenu.IsOpen = true;
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsTrayItemFramework
+namespace Framework
 {
     public class ViewSwitcher
     {
