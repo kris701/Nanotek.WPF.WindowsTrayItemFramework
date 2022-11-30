@@ -20,17 +20,9 @@ jobs:
 #        with:
 #          dotnet-version: '2.2.105' 
           
-      - name: Build solution and generate NuGet package
+      - name: Build and Publish
         run: |  
           cd WindowsTrayItemFramework
           dotnet build --configuration Release
           dotnet pack -c Release -o out  
-
-      - name: Install NuGet client
-        uses: warrenbuckley/Setup-Nuget@v1
-        
-      - name: Add private GitHub registry to NuGet
-        run: nuget sources add -name "WindowsTrayItemFramework" -Source https://nuget.pkg.github.com/kris701/index.json -Username kris701 -Password ${{ secrets.NUGET_API_KEY }}
-        
-      - name: Push generated package to GitHub registry
-        run: nuget push .\out\*.nupkg -source "github" -SkipDuplicate --api-key secrets.NUGET_API_KEY
+          dotnet nuget push "out/*.nupkg"  --api-key ${{ secrets.NUGET_API_KEY }} --source "github"
