@@ -23,6 +23,7 @@ jobs:
       - name: Build solution and generate NuGet package
         run: |  
           cd WindowsTrayItemFramework
+          dotnet build --configuration Release
           dotnet pack -c Release -o out  
 
       - name: Install NuGet client
