@@ -23,6 +23,7 @@ jobs:
       - name: Build and Publish
         run: |  
           cd WindowsTrayItemFramework
+          dotnet nuget add source --username kris701 --password ${{ secrets.NUGET_API_KEY }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kris701/index.json"
           dotnet build --configuration Release
-          dotnet pack -c Release -o out  
-          dotnet nuget push "out/*.nupkg"  --api-key ${{ secrets.NUGET_API_KEY }} --source "github"
+          dotnet pack --configuration Release
+          dotnet nuget push "bin/Release/*.nupkg"  --api-key ${{ secrets.NUGET_API_KEY }} --source "github"
