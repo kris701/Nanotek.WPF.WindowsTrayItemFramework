@@ -4,6 +4,12 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Windows Tray Item Framework</Title>
+    <Authors>Kristian Skov Johansen</Authors>
+    <Company />
+    <Description>A simple framework to make WPF tray icon windows.</Description>
+    <RepositoryUrl>https://github.com/kris701/WindowsTrayItemFramework</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
