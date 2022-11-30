@@ -3,29 +3,33 @@ name: NuGet Generation
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
     runs-on: windows-latest
-    name: Update NuGet package
+    name: Update NuGet 
     steps:
 
       - name: Checkout repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@master
 
-      - name: Setup .NET Core @ Latest
-        uses: actions/setup-dotnet@v1
-        with:
-          source-url: https://nuget.pkg.github.com/kris701/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.NUGET_API_KEY}}        
+#  latest image has .NET already installed!
+#      - name: Setup .NET environment
+#        uses: actions/setup-dotnet@v1
+#        with:
+#          dotnet-version: '2.2.105' 
           
       - name: Build solution and generate NuGet package
         run: |  
           cd WindowsTrayItemFramework
-          dotnet build --configuration Release
           dotnet pack -c Release -o out  
 
+      - name: Install NuGet client
+        uses: warrenbuckley/Setup-Nuget@v1
+        
+      - name: Add private GitHub registry to NuGet
+        run: nuget sources add -name "WindowsTrayItemFramework" -Source https://nuget.pkg.github.com/kris701/index.json -Username kris701 -Password ${{ secrets.NUGET_API_KEY }}
+        
       - name: Push generated package to GitHub registry
-        run: dotnet nuget push ./WindowsTrayItemFramework/out/*.nupkg --skip-duplicate --no-symbols true
+        run: nuget push .\WindowsTrayItemFramework\WindowsTrayItemFramework\out\*.nupkg -Source "WindowsTrayItemFramework" -SkipDuplicate
