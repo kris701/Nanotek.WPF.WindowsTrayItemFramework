@@ -29,3 +29,4 @@ jobs:
           cd bin
           cd Release
           dotnet nuget push "*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source "github"
+          dotnet nuget push "*.nupkg" --api-key ${{ secrets.API_KEY }} --source "https://api.nuget.org/v3/index.json"
