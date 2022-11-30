@@ -26,5 +26,6 @@ jobs:
           dotnet nuget add source --username kris701 --password ${{ secrets.NUGET_API_KEY }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kris701/index.json"
           dotnet build --configuration Release
           dotnet pack --configuration Release
-          ls
-          dotnet nuget push "./bin/Release/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source "github"
+          cd bin
+          cd Release
+          dotnet nuget push "*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source "github"
