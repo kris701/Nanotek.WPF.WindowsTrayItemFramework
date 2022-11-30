@@ -1,4 +1,4 @@
-﻿using Framework;
+﻿using WindowsTrayItemFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace TemplateProject
 {
-    /// <summary>
-    /// Interaction logic for TemplateView.xaml
-    /// </summary>
     public partial class TemplateView : UserControl, TrayWindowSwitchable
     {
         public UIElement Element { get; }
