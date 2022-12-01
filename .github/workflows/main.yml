@@ -17,7 +17,7 @@ jobs:
       - name: Build and Publish
         run: |  
           cd Nanotek.WPF.WindowsTrayItemFramework
-          dotnet nuget add source --username kris701 --password ${{ secrets.NUGET_API_KEY }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kris701/index.json"
+          dotnet nuget add source --username kris701 --password ${{ secrets.API_KEY_GITHUB }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kris701/index.json"
           dotnet build --configuration Release
           dotnet pack --configuration Release
           cd bin
