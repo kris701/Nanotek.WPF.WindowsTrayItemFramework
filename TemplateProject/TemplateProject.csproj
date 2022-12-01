@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WindowsTrayItemFramework\WindowsTrayItemFramework.csproj" />
+    <ProjectReference Include="..\Nanotek.WPF.WindowsTrayItemFramework\Nanotek.WPF.WindowsTrayItemFramework.csproj" />
   </ItemGroup>
 
 </Project>

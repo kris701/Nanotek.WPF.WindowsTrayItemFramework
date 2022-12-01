@@ -1,4 +1,4 @@
-﻿using WindowsTrayItemFramework;
+﻿using Nanotek.WPF.WindowsTrayItemFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;

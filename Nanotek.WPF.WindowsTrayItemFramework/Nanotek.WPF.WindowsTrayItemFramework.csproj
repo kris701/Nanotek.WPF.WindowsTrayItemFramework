@@ -9,7 +9,7 @@
     <Authors>Kristian Skov Johansen</Authors>
     <Company />
     <Description>A simple framework to make WPF tray icon windows.</Description>
-    <RepositoryUrl>https://github.com/kris701/WindowsTrayItemFramework</RepositoryUrl>
+    <RepositoryUrl>https://github.com/kris701/Nanotek.WPF.WindowsTrayItemFramework</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WindowsTrayItemFramework.Helpers
+namespace Nanotek.WPF.WindowsTrayItemFramework.Helpers
 {
     internal static class FadeHelper
     {

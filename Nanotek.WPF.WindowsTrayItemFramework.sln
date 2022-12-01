@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateProject", "TemplateProject\TemplateProject.csproj", "{52E5071B-4C2E-4F71-A0AD-2D22A765B1E2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsTrayItemFramework", "WindowsTrayItemFramework\WindowsTrayItemFramework.csproj", "{7EF9E9CD-DB66-4B9F-A876-40FA044E6615}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nanotek.WPF.WindowsTrayItemFramework", "Nanotek.WPF.WindowsTrayItemFramework\Nanotek.WPF.WindowsTrayItemFramework.csproj", "{7EF9E9CD-DB66-4B9F-A876-40FA044E6615}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-﻿using WindowsTrayItemFramework.Helpers;
+﻿using Nanotek.WPF.WindowsTrayItemFramework.Helpers;
 using Hardcodet.Wpf.TaskbarNotification;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media.Media3D;
 
-namespace WindowsTrayItemFramework
+namespace Nanotek.WPF.WindowsTrayItemFramework
 {
     public class TrayWindow : Window, ITrayWindow
     {
