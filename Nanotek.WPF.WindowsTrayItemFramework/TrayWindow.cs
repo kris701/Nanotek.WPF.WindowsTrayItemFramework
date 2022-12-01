@@ -1,4 +1,4 @@
-﻿using Nanotek.WPF.WindowsTrayItemFramework.Helpers;
+﻿using Nanotek.WPF.Helpers;
 using Hardcodet.Wpf.TaskbarNotification;
 using System;
 using System.Collections.Generic;
